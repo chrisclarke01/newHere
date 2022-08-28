@@ -40,7 +40,7 @@ As of right now, here are the planned features:
 1. ATLAS_URI: The URI of the MongoDB database you have set up.
 2. PORT: The port the server should run on (5000 recommended)
 3. TOKEN_SECRET: This should be a long, random string.
-- Run *node server.js*
+- Run *npm start*
 - Navigate to *client*
 - Run *npm start*
 
