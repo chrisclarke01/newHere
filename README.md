@@ -31,12 +31,16 @@ As of right now, here are the planned features:
 - Identity reveal upon group threshold being met
 - Auto-populating upon startup with *x* random users and activities from library and assigning random scores
 
-## Todos
-- Follow guide: https://www.mongodb.com/languages/mern-stack-tutorial
-- Implement user authentication in the backend
-- Implement user authentication in the frontend
+## Current Todos
+- Implement registration frontend
 
 ## How to Run
+- Navigate to *server*
+- Create a *config.env* file and add the following variables:
+1. ATLAS_URI: The URI of the MongoDB database you have set up.
+2. PORT: The port the server should run on (5000 recommended)
+3. TOKEN_SECRET: This should be a long, random string.
+- Run *node server.js*
 - Navigate to *client*
 - Run *npm start*
 
@@ -44,3 +48,7 @@ As of right now, here are the planned features:
 This application uses the following technologies
 - Node.js
 - React.js
+- Express.js
+- Mongoose
+- MongoDB
+- Postman (for testing APIs)

@@ -1,27 +1,19 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React from "react";
+import { Routes, Route } from "react-router-dom";
 
-import logo from './logo.png';
-import Navbar from './components/Navbar';
-import About from './pages/about';
-import Signup from './pages/signup';
-import './App.css';
+import Dashboard from "./components/dashboard";
+import Navbar from "./components/navbar";
+import Register from "./components/register"
+import "./App.css";
 
 function App() {
   return (
     <div>
-      <Router>
         <Navbar />
         <Routes>
-          <Route path='/about' element = { <About/> } />
-          <Route path='/signup' element = { <Signup/> } />
+          <Route exact path="/" element = { <Dashboard/> } />
+          <Route path = "/register" element = { <Register/> } />
         </Routes>
-      </Router>
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          newHere
-        </p>
-      </header>
     </div>
   );
 }

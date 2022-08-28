@@ -1,19 +1,30 @@
 const express = require("express");
-const app = express();
+const mongoose = require("mongoose");
+const port = process.env.PORT || 5000;
 const cors = require("cors");
 
 require("dotenv").config({path: "./config.env"});
-const port = process.env.PORT || 5000;
-app.use(cors());
-app.use(express.json());
-app.use(require("./routes/record"));
 
-const dbo = require("./db/conn");
+const authRoutes = require("./routes/authentication");
+const { db } = require("./models/User");
+
+//App definition
+const app = express();
+
+//DB connection
+mongoose.connect(process.env.ATLAS_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+})
+.then(() => console.log("Connected to Database."));
+
+//Middleware
+app.use(express.json());
+app.use(cors());
+
+//Routing middleware
+app.use("/api", authRoutes);
 
 app.listen(port, () => {
-    //Connect to database upon server start
-    dbo.connectToServer(function (err) {
-        if (err) console.error(err);
-    });
     console.log(`Server is running on port: ${port}`);
 });
