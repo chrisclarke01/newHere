@@ -1,134 +1,40 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router";
- 
 export default function Register() {
- const [form, setForm] = useState({
-   username: "",
-   email: "",
-   password: "",
-   description: "",
-   age: "",
-   gender: "",
- });
- const navigate = useNavigate();
- 
- // These methods will update the state properties.
- function updateForm(value) {
-   return setForm((prev) => {
-     return { ...prev, ...value };
-   });
- }
- 
- // This function will handle the submission.
- async function onSubmit(e) {
+
+  async function handleRegister(e) {
     e.preventDefault();
-  
-    // When a post request is sent to the create url, we'll add a new record to the database.
-    const newAccount = { ...form };
-  
-    await fetch("http://localhost:5000/record/add", {
+
+    const form = e.target;
+    const user = {
+      username: form[0].value,
+      email: form[1].value,
+      password: form[2].value,
+      password_confirmation: form[3].value,
+      description: form[4].value,
+      age: form[5].value,
+      gender: form[6].value
+    }
+
+    fetch("http://localhost:5000/api/signup", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-type": "application/json"
       },
-      body: JSON.stringify(newAccount),
+      body: JSON.stringify(user)
     })
-    .catch(error => {
-      window.alert(error);
-      return;
-    });
-  
-    setForm({ username: "", email: "", password: "", description: "", age: "", gender: "", });
-    navigate("/");
   }
- 
- // This following section will display the form that takes the input from the user.
- return (
-   <div>
-     <h3>Register a New Account</h3>
-     <form onSubmit={onSubmit}>
 
-       {/* Username */}
-       <div className="form-group">
-         <label htmlFor="username">Username</label>
-         <input
-           type="text"
-           className="form-control"
-           id="username"
-           value={form.username}
-           onChange={(e) => updateForm({ username: e.target.value })}
-         />
-       </div>
-
-       {/* Email */}
-       <div className="form-group">
-         <label htmlFor="position">Email</label>
-         <input
-           type="text"
-           className="form-control"
-           id="email"
-           value={form.email}
-           onChange={(e) => updateForm({ email: e.target.value })}
-         />
-       </div>
-
-       { /* Password */}
-       <div className="form-group">
-         <label htmlFor="">Password</label>
-         <input
-           type="text"
-           className="form-control"
-           id="password"
-           value={form.password}
-           onChange={(e) => updateForm({ password: e.target.value })}
-         />
-       </div>
-
-       { /* Description */}
-       <div className="form-group">
-         <label htmlFor="">Description</label>
-         <input
-           type="text"
-           className="form-control"
-           id="description"
-           value={form.description}
-           onChange={(e) => updateForm({ description: e.target.value })}
-         />
-       </div>
-
-       { /* Age */}
-       <div className="form-group">
-         <label htmlFor="">Age</label>
-         <input
-           type="number"
-           className="form-control"
-           id="age"
-           value={form.age}
-           onChange={(e) => updateForm({ age: e.target.value })}
-         />
-       </div>
-
-       { /* Gender */}
-       <div className="form-group">
-         <label htmlFor="">Gender</label>
-         <input
-           type="text"
-           className="form-control"
-           id="gender"
-           value={form.gender}
-           onChange={(e) => updateForm({ gender: e.target.value })}
-         />
-       </div>
-
-       { /* Submit Button */}
-       <div className="form-group">
-         <input
-           type="submit"
-           value="Create person"
-           className="btn btn-primary"
-         />
-       </div>
-     </form>
-   </div>
- );
+  return(
+    <form onSubmit={ event => handleRegister(event) }>
+      <ul>
+        <li><input required type = "username" /></li>
+        <li><input required type = "email" /></li>
+        <li><input required type = "password" /></li>
+        <li><input required type = "password" /></li>
+        <li><input type = "description" /></li>
+        <li><input type = "age" /></li>
+        <li><input type = "gender" /></li>
+        <li><input type = "submit" value = "Submit" /></li>
+      </ul>
+    </form>
+)
 }

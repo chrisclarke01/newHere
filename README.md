@@ -32,7 +32,11 @@ As of right now, here are the planned features:
 - Auto-populating upon startup with *x* random users and activities from library and assigning random scores
 
 ## Current Todos
-- Implement registration frontend
+- Add proxy to package.json to proxy the backend so that I don't have to hardcode localhost in the frontend fetch request
+- Create profile page
+- Redirect user to profile page upon login
+- Add CSS to decorate/design registration page
+- Add CSS to decorate/design login page
 
 ## How to Run
 - Navigate to *server*
